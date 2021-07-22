@@ -71,8 +71,6 @@ static int *macro_buffer = NULL;
 		/* A buffer where the recorded key codes are stored. */
 static size_t macro_length = 0;
 		/* The current length of the macro. */
-static bool isInsert = FALSE;
-		/* Current mode of editor */
 
 /* Add the given code to the macro buffer. */
 void add_to_macrobuffer(int code)

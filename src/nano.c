@@ -1505,11 +1505,30 @@ void process_a_keystroke(void)
 
 	/* Read in a keystroke, and show the cursor while waiting. */
 	input = get_kbinput(edit, VISIBLE);
-	if (input == ESC_CODE)
-	{
-		//statusbar(_("switched to lock mode"));
-		//return;
+
+	if (input == 'i' && locked == TRUE) {
+		locked = FALSE;
+		statusbar(_("switched to insert mode"));
+	}else if (input == ESC_CODE) {
+		locked = TRUE;
+		statusbar(_("switched to lock mode"));
+		return;
 	}
+
+	if (locked == TRUE) {
+		if (input == 'j')
+			do_down();
+		else if (input == 'k')
+			do_up();
+		else if (input == 'l')
+			do_right();
+		else if (input == 'h')
+			do_left();
+		else 
+			statusbar(_("unbound command"));
+		return;
+	}
+
 	lastmessage = VACUUM;
 	hide_cursor = FALSE;
 
@@ -1585,7 +1604,7 @@ void process_a_keystroke(void)
 #ifndef NANO_TINY
 		if (shortcut->func != copy_text && shortcut->func != zap_text)
 #endif
-			keep_cutbuffer = FALSE;
+		keep_cutbuffer = FALSE;
 	}
 
 #ifdef ENABLE_WORDCOMPLETION

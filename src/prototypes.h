@@ -26,6 +26,9 @@
 extern volatile sig_atomic_t the_window_resized;
 #endif
 
+static bool locked = FALSE;
+		/* Current mode of editor */
+
 extern bool on_a_vt;
 extern bool shifted_metas;
 
