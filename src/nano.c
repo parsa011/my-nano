@@ -1267,12 +1267,10 @@ void unbound_key(int code)
 		else
 #endif
 			statusline(AHEM, _("Unbound key: M-%c"), toupper(code));
-	} else if (code == ESC_CODE)
-		statusline(AHEM, _("Unbindable key: ^["));
-	else if (code < 0x20)
+	} else if (code < 0x20 && code != ESC_CODE)
 		statusline(AHEM, _("Unbound key: ^%c"), code + 0x40);
 #if defined(ENABLE_BROWSER) || defined (ENABLE_HELP)
-	else
+	else if (code != ESC_CODE)
 		statusline(AHEM, _("Unbound key: %c"), code);
 #endif
 	set_blankdelay_to_one();
@@ -1509,7 +1507,8 @@ void process_a_keystroke(void)
 	input = get_kbinput(edit, VISIBLE);
 	if (input == ESC_CODE)
 	{
-		statusbar(_("switched to lock mode"));
+		//statusbar(_("switched to lock mode"));
+		//return;
 	}
 	lastmessage = VACUUM;
 	hide_cursor = FALSE;
