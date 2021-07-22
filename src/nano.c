@@ -1510,7 +1510,7 @@ void process_a_keystroke(void)
 		locked = FALSE;
 		statusbar(_("switched to insert mode"));
 		return;
-	}else if (input == ESC_CODE) {
+	}else if (input == ESC_CODE && locked == FALSE) {
 		locked = TRUE;
 		statusbar(_("switched to lock mode"));
 		return;
