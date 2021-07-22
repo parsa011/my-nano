@@ -1509,6 +1509,7 @@ void process_a_keystroke(void)
 	if (input == 'i' && locked == TRUE) {
 		locked = FALSE;
 		statusbar(_("switched to insert mode"));
+		return;
 	}else if (input == ESC_CODE) {
 		locked = TRUE;
 		statusbar(_("switched to lock mode"));
@@ -1548,7 +1549,8 @@ void process_a_keystroke(void)
 			// 	else
 			// 		statusbar(_("unbound command"));
 			// break;
-		}		
+		}	
+			
 		return;
 	}
 

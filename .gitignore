@@ -1,2 +1,5 @@
 *.o
+*.save
 *.save.*
+*.swp
+src/nano
