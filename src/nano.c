@@ -1516,16 +1516,33 @@ void process_a_keystroke(void)
 	}
 
 	if (locked == TRUE) {
-		if (input == 'j')
-			do_down();
-		else if (input == 'k')
-			do_up();
-		else if (input == 'l')
-			do_right();
-		else if (input == 'h')
-			do_left();
-		else 
-			statusbar(_("unbound command"));
+		switch (input)
+		{
+			case 'j':
+				do_down();
+				break;
+			case 'k':
+				do_up();
+				break;
+			case 'l':
+				do_right();
+				break;
+			case 'h':
+				do_left();
+				break;
+			case 'u':
+				do_undo();
+				break;
+			case 'r':
+				do_redo();
+				break;
+			default:
+				if (shortcut = get_shortcut(&input) != NULL)
+					shortcut->func();
+				else
+					statusbar(_("unbound command"));
+			break;
+		}		
 		return;
 	}
 
