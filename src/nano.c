@@ -1536,12 +1536,18 @@ void process_a_keystroke(void)
 			case 'r':
 				do_redo();
 				break;
-			default:
-				if (shortcut = get_shortcut(&input) != NULL)
-					shortcut->func();
-				else
-					statusbar(_("unbound command"));
-			break;
+			case 'w':
+				do_next_word(TRUE,TRUE);
+				break;
+			case 'b':
+				do_prev_word(TRUE);
+				break;
+			// default:
+			// 	if (shortcut = get_shortcut(&input) != NULL)
+			// 		shortcut->func();
+			// 	else
+			// 		statusbar(_("unbound command"));
+			// break;
 		}		
 		return;
 	}
