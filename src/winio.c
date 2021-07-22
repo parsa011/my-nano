@@ -938,15 +938,14 @@ int parse_kbinput(WINDOW *win)
 	/* For an Esc, remember whether the last two arrived by themselves.
 	 * Then increment the counter, rolling around on three escapes. */
 	if (keycode == ESC_CODE) {
-		
-		// first_escape_was_alone = last_escape_was_alone;
-		// last_escape_was_alone = (key_buffer_len == 0);
-		// if (digit_count > 0) {
-		// 	digit_count = 0;
-		// 	escapes = 1;
-		// } else if (++escapes > 2)
-		// 	escapes = (last_escape_was_alone ? 0 : 1);
-		// return ERR;
+		first_escape_was_alone = last_escape_was_alone;
+		last_escape_was_alone = (key_buffer_len == 0);
+		if (digit_count > 0) {
+			digit_count = 0;
+			escapes = 1;
+		} else if (++escapes > 2)
+			escapes = (last_escape_was_alone ? 0 : 1);
+		return ESC_CODE;
 	}
 
 	if (escapes == 0) {

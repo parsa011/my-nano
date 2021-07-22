@@ -1543,6 +1543,15 @@ void process_a_keystroke(void)
 			case 'b':
 				do_prev_word(TRUE);
 				break;
+			case 'o':
+			 	do_enter();
+				break;
+			case 'p':
+				paste_text();
+				break;
+			case 'y':
+				copy_text();
+				break;
 			// default:
 			// 	if (shortcut = get_shortcut(&input) != NULL)
 			// 		shortcut->func();
