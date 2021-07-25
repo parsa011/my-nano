@@ -1506,60 +1506,16 @@ void process_a_keystroke(void)
 	/* Read in a keystroke, and show the cursor while waiting. */
 	input = get_kbinput(edit, VISIBLE);
 
-	if (input == 'i' && locked == TRUE) {
-		locked = FALSE;
-		statusbar(_("switched to insert mode"));
+	if (input == 'i' && is_vim_lock()) {
+		change_vim_mode(FALSE);		
 		return;
-	}else if (input == ESC_CODE && locked == FALSE) {
-		locked = TRUE;
-		statusbar(_("switched to lock mode"));
+	}else if (input == ESC_CODE && !is_vim_lock()) {
+		change_vim_mode(TRUE);		
 		return;
 	}
 
-	if (locked == TRUE) {
-		switch (input)
-		{
-			case 'j':
-				do_down();
-				break;
-			case 'k':
-				do_up();
-				break;
-			case 'l':
-				do_right();
-				break;
-			case 'h':
-				do_left();
-				break;
-			case 'u':
-				do_undo();
-				break;
-			case 'r':
-				do_redo();
-				break;
-			case 'w':
-				do_next_word(TRUE,TRUE);
-				break;
-			case 'b':
-				do_prev_word(TRUE);
-				break;
-			case 'o':
-			 	do_enter();
-				break;
-			case 'p':
-				paste_text();
-				break;
-			case 'y':
-				copy_text();
-				break;
-			// default:
-			// 	if (shortcut = get_shortcut(&input) != NULL)
-			// 		shortcut->func();
-			// 	else
-			// 		statusbar(_("unbound command"));
-			// break;
-		}	
-			
+	if (is_vim_lock()) {
+		control_vim_mode_input(input);
 		return;
 	}
 

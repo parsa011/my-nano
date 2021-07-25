@@ -3,3 +3,4 @@
 *.save.*
 *.swp
 src/nano
+default.profraw

@@ -3557,6 +3557,66 @@ void spotlight(size_t from_col, size_t to_col)
 	free(word);
 }
 
+/* if ISSET(vim) , will check if editor is in locked mode  */
+void change_vim_mode(bool islock) {
+	locked  = islock;
+	if (islock)
+		statusbar(_("switched to lock mode"));
+	else
+		statusbar(_("switched to insert mode"));
+}
+
+bool is_vim_lock()
+{
+	return locked;
+}
+
+/* if is_vim_lock() , will control user input keys */
+void control_vim_mode_input(int input) {
+	switch (input)
+	{
+		case 'j':
+			do_down();
+			break;
+		case 'k':
+			do_up();
+			break;
+		case 'l':
+			do_right();
+			break;
+		case 'h':
+			do_left();
+			break;
+		case 'u':
+			do_undo();
+			break;
+		case 'r':
+			do_redo();
+			break;
+		case 'w':
+			do_next_word(TRUE,TRUE);
+			break;
+		case 'b':
+			do_prev_word(TRUE);
+			break;
+		case 'o':
+			do_enter();
+			break;
+		case 'p':
+			paste_text();
+			break;
+		case 'y':
+			copy_text();
+			break;
+		// default:
+		// 	if (shortcut = get_shortcut(&input) != NULL)
+		// 		shortcut->func();
+		// 	else
+		// 		statusbar(_("unbound command"));
+		// break;
+	}
+}
+
 #ifndef NANO_TINY
 /* Highlight the text between the given two columns on the current line. */
 void spotlight_softwrapped(size_t from_col, size_t to_col)
