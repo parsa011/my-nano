@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "prototypes.h": "c",
-        "*.tcc": "c",
-        "string": "c"
-    }
-}

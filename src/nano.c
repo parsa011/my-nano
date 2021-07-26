@@ -1508,10 +1508,10 @@ void process_a_keystroke(void)
 
 	if (ISSET(LOCKING)){
 		if (input == 'i' && is_vim_lock()) {
-			change_vim_mode(FALSE);		
+			change_vim_mode(FALSE);
 			return;
 		}else if (input == ESC_CODE && !is_vim_lock()) {
-			change_vim_mode(TRUE);		
+			change_vim_mode(TRUE);
 			return;
 		}
 		if (is_vim_lock()) {
@@ -1540,6 +1540,7 @@ void process_a_keystroke(void)
 
 	/* Check for a shortcut in the main list. */
 	shortcut = get_shortcut(&input);
+	
 
 	/* If not a command, discard anything that is not a normal character byte. */
 	if (shortcut == NULL) {

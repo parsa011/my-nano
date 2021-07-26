@@ -933,7 +933,7 @@ int parse_kbinput(WINDOW *win)
 	keycode = get_input(win);
 
 	if (keycode == ERR)
-		return ERR;
+		return ERR;	
 
 	/* For an Esc, remember whether the last two arrived by themselves.
 	 * Then increment the counter, rolling around on three escapes. */
@@ -3573,48 +3573,10 @@ bool is_vim_lock()
 
 /* if is_vim_lock() , will control user input keys */
 void control_vim_mode_input(int input) {
-	switch (input)
-	{
-		case 'j':
-			do_down();
-			break;
-		case 'k':
-			do_up();
-			break;
-		case 'l':
-			do_right();
-			break;
-		case 'h':
-			do_left();
-			break;
-		case 'u':
-			do_undo();
-			break;
-		case 'r':
-			do_redo();
-			break;
-		case 'w':
-			do_next_word(TRUE,TRUE);
-			break;
-		case 'b':
-			do_prev_word(TRUE);
-			break;
-		case 'o':
-			do_enter();
-			break;
-		case 'p':
-			paste_text();
-			break;
-		case 'y':
-			copy_text();
-			break;
-		// default:
-		// 	if (shortcut = get_shortcut(&input) != NULL)
-		// 		shortcut->func();
-		// 	else
-		// 		statusbar(_("unbound command"));
-		// break;
-	}
+	keystruct *shortcut = get_shortcut(&input);
+	
+	if (shortcut != NULL)
+		shortcut->func();
 }
 
 #ifndef NANO_TINY

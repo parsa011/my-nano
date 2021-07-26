@@ -420,7 +420,7 @@ int keycode_from_string(const char *keystring)
 	else if (strcasecmp(keystring, "Del") == 0)
 		return KEY_DC;
 	else
-		return -1;
+		return (int)keystring[0];
 }
 
 /* Add a key combo to the linked list of shortcuts. */
@@ -1222,6 +1222,20 @@ void shortcut_init(void)
 	add_to_sclist(MMAIN, "M-R", 0, do_replace, 0);
 	add_to_sclist(MMOST, "^K", 0, cut_text, 0);
 	add_to_sclist(MMOST, "^U", 0, paste_text, 0);
+	if (ISSET(LOCKING)){
+		add_to_sclist(MMAIN,"j",0,do_down,0);
+		add_to_sclist(MMAIN,"k",0,do_up,0);
+		add_to_sclist(MMAIN,"h",0,do_left,0);
+		add_to_sclist(MMAIN,"l",0,do_right,0);
+		add_to_sclist(MMAIN,"o",0,do_enter,0);
+		add_to_sclist(MMAIN,"O",0,do_enter,0);
+		add_to_sclist(MMAIN,"u",0,do_undo,0);
+		add_to_sclist(MMAIN,"r",0,do_redo,0);
+		add_to_sclist(MMAIN,"y",0,copy_text,0);
+		add_to_sclist(MMAIN,"p",0,paste_text,0);
+		add_to_sclist(MMAIN,"w",0,do_next_word,0);
+		add_to_sclist(MMAIN,"b",0,do_prev_word,0);
+	}
 #ifndef NANO_TINY
 	add_to_sclist(MMAIN, "^T", 0, do_execute, 0);
 #endif
