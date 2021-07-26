@@ -382,6 +382,8 @@ void add_to_funcs(void (*func)(void), int menus, const char *desc,
  * or return -1 when the string is invalid. */
 int keycode_from_string(const char *keystring)
 {
+	if (strlen(keystring) == 1)
+		return keystring[0];
 	if (keystring[0] == '^') {
 		if (keystring[2] == '\0') {
 			if (keystring[1] == '/' || keystring[1] == '-')
@@ -420,7 +422,7 @@ int keycode_from_string(const char *keystring)
 	else if (strcasecmp(keystring, "Del") == 0)
 		return KEY_DC;
 	else
-		return (int)keystring[0];
+		return -1;
 }
 
 /* Add a key combo to the linked list of shortcuts. */

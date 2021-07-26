@@ -26,9 +26,6 @@
 extern volatile sig_atomic_t the_window_resized;
 #endif
 
-static bool locked = FALSE;
-		/* Current mode of editor */
-
 extern bool on_a_vt;
 extern bool shifted_metas;
 
@@ -623,9 +620,7 @@ void full_refresh(void);
 void draw_all_subwindows(void);
 void report_cursor_position(void);
 void spotlight(size_t from_col, size_t to_col);
-void change_vim_mode(bool islock);
-bool is_vim_lock();
-void control_vim_mode(int input);
+void control_vim_mode_input(int input);
 #ifndef NANO_TINY
 void spotlight_softwrapped(size_t from_col, size_t to_col);
 #endif

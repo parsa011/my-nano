@@ -3557,24 +3557,10 @@ void spotlight(size_t from_col, size_t to_col)
 	free(word);
 }
 
-/* if ISSET(vim) , will check if editor is in locked mode  */
-void change_vim_mode(bool islock) {
-	locked  = islock;
-	if (islock)
-		statusbar(_("switched to lock mode"));
-	else
-		statusbar(_("switched to insert mode"));
-}
-
-bool is_vim_lock()
-{
-	return locked;
-}
-
 /* if is_vim_lock() , will control user input keys */
 void control_vim_mode_input(int input) {
-	keystruct *shortcut = get_shortcut(&input);
-	
+	const keystruct *shortcut = get_shortcut(&input);
+  
 	if (shortcut != NULL)
 		shortcut->func();
 }
