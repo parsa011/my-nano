@@ -513,7 +513,7 @@ void usage(void)
 					N_("Read a file into a new buffer by default"));
 #endif
 #ifndef NANO_TINY
-	print_opt("-G", "--locking", N_("Use (-style) lock files"));
+	print_opt("-G", "--locking", N_("Use (vim-style) lock files"));
 #endif
 #ifdef ENABLE_HISTORIES
 	if (!ISSET(RESTRICTED))
@@ -1505,6 +1505,20 @@ void process_a_keystroke(void)
 
 	/* Read in a keystroke, and show the cursor while waiting. */
 	input = get_kbinput(edit, VISIBLE);
+
+	if (ISSET(LOCKING)){
+		if (input == 'i' && is_vim_lock()) {
+			change_vim_mode(FALSE);
+			return;
+		}else if (input == ESC_CODE && !is_vim_lock()) {
+			change_vim_mode(TRUE);
+			return;
+		}
+		if (is_vim_lock()) {
+			control_vim_mode_input(input);
+			return;
+		}
+	}	
 
 	lastmessage = VACUUM;
 	hide_cursor = FALSE;
