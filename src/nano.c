@@ -1507,18 +1507,19 @@ void process_a_keystroke(void)
 	input = get_kbinput(edit, VISIBLE);
 
 	if (ISSET(LOCKING)){
-		if (input == 'i' && is_vim_lock()) {
+		bool islock = is_vim_lock();
+		if (input == 'i' && islock) {
 			change_vim_mode(FALSE);
 			return;
-		}else if (input == ESC_CODE && !is_vim_lock()) {
+		}else if (input == ESC_CODE && !islock) {
 			change_vim_mode(TRUE);
 			return;
 		}
-		if (is_vim_lock()) {
+		if (islock){
 			control_vim_mode_input(input);
 			return;
 		}
-	}	
+	}
 
 	lastmessage = VACUUM;
 	hide_cursor = FALSE;

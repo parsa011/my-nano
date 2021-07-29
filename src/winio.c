@@ -3573,7 +3573,7 @@ bool is_vim_lock()
 
 /* if is_vim_lock() , will control user input keys */
 void control_vim_mode_input(int input) {
-	keystruct *shortcut = get_shortcut(&input);
+	const keystruct *shortcut = get_shortcut(&input);
 	
 	if (shortcut != NULL)
 		shortcut->func();

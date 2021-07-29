@@ -31,6 +31,7 @@ volatile sig_atomic_t the_window_resized = FALSE;
 		/* Set to TRUE by the handler whenever a SIGWINCH occurs. */
 #endif
 
+bool locked = FALSE;
 bool on_a_vt = FALSE;
 		/* Whether we're running on a Linux console (a VT). */
 bool shifted_metas = FALSE;
